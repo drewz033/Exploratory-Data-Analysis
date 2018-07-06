@@ -1,0 +1,50 @@
+#below code shows how to maniuplate data in pandas to collect and graph historic information on S&P 500 Constituents (important to note survivorship
+#bias is not accounted for). This code tracks the historic price to book of companies in the S&P 500 and graphs the spread over time
+#between the top 20% and the bottom 20% to visualize how expensive stocks are today
+
+
+#import packages
+import pandas as pd
+import numpy as np
+
+#load dataframe from csv file
+df=pd.read_csv('historic_pb.csv')
+
+#visualize dataframe to make sure it imported correctly
+df.head()
+
+#calculate the spread between top 20% and bottom 20% and create a new column
+df_spread=df.quantile(.8)-df.quantile(.2)
+
+
+#this turns df_spread into a data frame...original code sets it as a numpy array
+df_PB_Spread=df_spread.to_frame()
+
+
+#set our dates to datetime formate in pandas so we can sort by date
+df_PB_Spread.index = pd.to_datetime(df_PB_Spread.index)
+
+df_PB_Spread.sort_index()
+
+
+#visualizing the Price to Book spread over time
+import plotly
+plotly.tools.set_credentials_file(username='#', api_key='#')
+
+import plotly.plotly as py
+import plotly.graph_objs as go
+
+#plotly graphs have interactive visualization and custom JavaScript built in for excellent formatting
+
+#create scatter graph with line connecting the plots
+trace1 = go.Scatter(
+    x = df_PB_Spread.index,
+    y = df_PB_Spread[0],
+    mode = 'lines+markers',
+    name = 'lines+markers'
+)
+
+
+data = [trace1]
+py.iplot(data, filename='line-mode')
+
