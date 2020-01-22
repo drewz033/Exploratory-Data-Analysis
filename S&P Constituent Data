@@ -1,6 +1,6 @@
-#below code shows how to maniuplate data in pandas to collect and graph historic information on S&P 500 Constituents (important to note survivorship
-#bias is not accounted for). This code tracks the historic price to book of companies in the S&P 500 and graphs the spread over time
-#between the top 20% and the bottom 20% to visualize how expensive stocks are today
+'''below code shows how to maniuplate data in pandas to collect and graph historic information on S&P 500 Constituents (important to note survivorship
+bias is not accounted for). This code tracks the historic price to book of companies in the S&P 500 and graphs the spread over time
+between the top 20% and the bottom 20% to visualize how expensive stocks are today'''
 
 
 #import packages
